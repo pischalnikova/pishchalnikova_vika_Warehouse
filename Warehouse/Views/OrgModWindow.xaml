@@ -1,0 +1,42 @@
+﻿<Window x:Class="Warehouse.Views.OrgModWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.Views"
+        mc:Ignorable="d"
+        Title="Организация" Height="200" Width="350" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="lblCaption"
+               Content="Название организации:" />
+
+        <TextBox x:Name="tbName"
+                 Grid.Row="1"
+                 Margin="0,5,0,10"/>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,0">
+
+            <Button Content="OK"
+            Width="80"
+            Height="28"
+            Margin="0,0,5,0"
+            Click="BtnOk_Click"/>
+
+            <Button Content="Отмена"
+            Width="80"
+            Height="28"
+            Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

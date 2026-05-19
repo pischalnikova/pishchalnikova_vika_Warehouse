@@ -1,0 +1,55 @@
+﻿<Window x:Class="Warehouse.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse"
+        mc:Ignorable="d"
+        Title="Управление складским хозяйством" Height="600" Width="1024" WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:WindowCommands.Exit" Executed="Exit_Executed"/>
+        <CommandBinding Command="local:WindowCommands.GetOrders" Executed="GetOrders_Executed"/>
+        <CommandBinding Command="local:WindowCommands.GetWarehouses" Executed="GetWarehouses_Executed"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <!-- Меню -->
+        <Menu DockPanel.Dock="Top" Background="#7FFF00">
+            <MenuItem Header="Фaйл">
+                <MenuItem Header="Bыxoд" Command="local:WindowCommands.Exit" />
+            </MenuItem>
+            <MenuItem Header="Склaды">
+                <MenuItem Header="Список складов"  Command="local:WindowCommands.GetWarehouses"/>
+                <Separator/>
+                <MenuItem Header="Добавить склaд" Command="{x:Static local:WindowCommands.WhAdd}"/>
+                <MenuItem Header="Изменить склад" Command="{x:Static local:WindowCommands.WhEdit}" />
+                <MenuItem Header="Удалить склад" Command="{x:Static local:WindowCommands.WhDelete}" />
+            </MenuItem>
+            <MenuItem Header="Toвap">
+                <MenuItem Header="Показать список" Command="{x:Static local:WindowCommands.GetProducts}" />
+                <Separator/>
+                <MenuItem Header="Добавить описание товара" Command="{x:Static local:WindowCommands.AddProduct}"/>
+                <MenuItem Header="Изменить описание товара" Command="{x:Static local:WindowCommands.EditProduct}"/>
+                <MenuItem Header="Удалить описание товара" Command="{x:Static local:WindowCommands.RemoveProduct}"/>
+            </MenuItem>
+            <MenuItem Header="Накладныe">
+                <MenuItem Header="Открыть список накладныx" Command="local:WindowCommands.GetOrders" />
+                <Separator/>
+                <MenuItem Header="Создать накладную" Command="{x:Static local:WindowCommands.AddOrder}"/>
+                <MenuItem Header="Согласовать накладную" Command="{x:Static local:WindowCommands.EditOrder}"/>
+                <MenuItem Header="Удалить накладную" Command="{x:Static local:WindowCommands.RemoveOrder}"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Панель пользователя -->
+        <StatusBar DockPanel.Dock="Bottom" Background="#F0F0F0">
+            <TextBlock x:Name="tbStatus" FontFamily="Verdana" 
+                   FontSize="14" HorizontalAlignment="Right" 
+                   Margin="10 0" FontWeight="Bold"/>
+        </StatusBar>
+
+        <!-- Контент -->
+        <Frame DockPanel.Dock="Right" x:Name="MainFrame" NavigationUIVisibility="Hidden" Background="White" />
+        <ContentControl Content="{Binding CurrentView}" />
+
+    </DockPanel>
+</Window>

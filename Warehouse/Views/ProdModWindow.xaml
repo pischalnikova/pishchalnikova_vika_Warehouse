@@ -1,0 +1,106 @@
+﻿<Window x:Class="Warehouse.Views.ProdModWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.Views"
+        mc:Ignorable="d"
+                Title="Товар"
+        Height="560"
+        Width="420"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Артикул:" Margin="0,5"/>
+                <TextBox x:Name="tbArticle" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Название:" Margin="0,5"/>
+                <TextBox x:Name="tbName" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Ед. измерения:" Margin="0,5"/>
+                <TextBox x:Name="tbUnit" Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Цена:" Margin="0,5"/>
+                <TextBox x:Name="tbPrice" Grid.Row="3" Grid.Column="1" Margin="5"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Категория:" Margin="0,5"/>
+                <ComboBox x:Name="cbCategory"
+                          Grid.Row="4"
+                          Grid.Column="1"
+                          Margin="5"
+                          DisplayMemberPath="Name"/>
+
+                <Label Grid.Row="5" Grid.Column="0" Content="Производитель:" Margin="0,5"/>
+                <ComboBox x:Name="cbManufacturer"
+                          Grid.Row="5"
+                          Grid.Column="1"
+                          Margin="5"
+                          DisplayMemberPath="Name"/>
+
+                <Label Grid.Row="6" Grid.Column="0" Content="Поставщик:" Margin="0,5"/>
+                <ComboBox x:Name="cbSupplier"
+                          Grid.Row="6"
+                          Grid.Column="1"
+                          Margin="5"
+                          DisplayMemberPath="Name"/>
+
+                <Label Grid.Row="8" Grid.Column="0" Content="Остаток:" Margin="0,5"/>
+                <TextBox x:Name="tbQuantity" Grid.Row="8" Grid.Column="1" Margin="5"/>
+
+                <Label Grid.Row="9" Grid.Column="0" Content="Описание:" Margin="0,5"/>
+                <TextBox x:Name="tbDescription"
+                         Grid.Row="9"
+                         Grid.Column="1"
+                         Margin="5"
+                         Height="70"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"/>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,0">
+
+            <Button Content="OK"
+            Width="80"
+            Height="28"
+            Margin="0,0,5,0"
+            Click="BtnOk_Click"/>
+
+            <Button Content="Отмена"
+            Width="80"
+            Height="28"
+            Click="BtnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="Warehouse.Controls.UserControlInvoices"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Warehouse.Controls"
+             xmlns:local2="clr-namespace:Warehouse"
+             mc:Ignorable="d" 
+                          d:DesignHeight="450" d:DesignWidth="999">
+    <UserControl.Resources>
+        <DataTemplate x:Key="orderTemplate">
+            <StackPanel Margin="4">
+                <TextBlock FontSize="14"
+                           Text="{Binding Number}" />
+                <TextBlock FontSize="11"
+                           Foreground="Gray"
+                           Text="{Binding Type}" />
+                <TextBlock FontSize="11"
+                       Foreground="DarkGreen"
+                       Text="{Binding Status}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="local2:WindowCommands.AddOrder"
+                    Executed="AddOrder_Executed"/>
+        <CommandBinding Command="local2:WindowCommands.EditOrder"
+            Executed="ApproveOrder_Executed"/>
+        <CommandBinding Command="local2:WindowCommands.RemoveOrder"
+                    Executed="RemoveOrder_Executed"/>
+        <CommandBinding Command="local2:WindowCommands.AddProduct" Executed="AddProduct_Executed"/>
+        <CommandBinding Command="local2:WindowCommands.EditProduct" Executed="EditProduct_Executed"/>
+        <CommandBinding Command="local2:WindowCommands.RemoveProduct" Executed="RemoveProduct_Executed"/>
+        <CommandBinding Command="local2:WindowCommands.GetProducts" Executed="GetProducts_Executed"/>
+    </UserControl.CommandBindings>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- список накладных -->
+        <ListBox x:Name="lbxOrders"
+                 Grid.Column="0"
+                 ItemTemplate="{StaticResource orderTemplate}"
+                 SelectionChanged="lbxOrders_SelectionChanged"
+                 MouseDoubleClick="DgOrds_MouseDoubleClick">
+
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Новая накладная"
+                              Command="local2:WindowCommands.AddOrder"/>
+                    <MenuItem Header="Согласовать накладную" 
+                              Command="local2:WindowCommands.EditOrder"/>
+                    <MenuItem Header="Удалить накладную"
+                              Command="local2:WindowCommands.RemoveOrder"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+        <GridSplitter Grid.Column="1"
+                      Width="3"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"/>
+
+        <!-- товары -->
+        <DataGrid x:Name="DgProducts"
+AutoGenerateColumns="False"
+IsReadOnly="True"
+SelectionMode="Single"
+Grid.Column="2"
+SelectionChanged="DgProducts_SelectionChanged"
+MouseDoubleClick="DgProducts_MouseDoubleClick"
+Margin="5"
+HeadersVisibility="Column"
+RowHeight="30"
+CanUserResizeColumns="True">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Наименование"
+                  Binding="{Binding Name}"
+                  Width="2*" />
+
+                <DataGridTextColumn Header="Категория"
+                  Binding="{Binding Category.Name}"
+                  Width="120" />
+
+                <DataGridTextColumn Header="Производитель"
+                  Binding="{Binding Manufacturer.Name}"
+                  Width="140" />
+
+                <DataGridTextColumn Header="Поставщик"
+                  Binding="{Binding Supplier.Name}"
+                  Width="120" />
+
+                <DataGridTextColumn Header="Цена"
+                  Binding="{Binding Price, StringFormat={}{0:F2}}"
+                  Width="90" />
+
+                <DataGridTextColumn Header="Остаток"
+                  Binding="{Binding StockQuantity}"
+                  Width="80" />
+
+            </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Hoвый товар" Command="local2:WindowCommands.AddProduct" />
+                    <MenuItem Header="Изменить товар" Command="local2:WindowCommands.EditProduct" />
+                    <MenuItem Header="Удалить товар" Command="local2:WindowCommands.RemoveProduct" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</UserControl>
